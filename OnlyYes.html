@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Only Yes 💖</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        overflow: hidden;
+    }
+
+    .card {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        position: relative;
+    }
+
+    h1 {
+        margin-bottom: 30px;
+        color: #ff4d6d;
+    }
+
+    button {
+        padding: 12px 30px;
+        font-size: 18px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+    }
+
+    #yesBtn {
+        background: #ff4d6d;
+        color: white;
+        margin-right: 20px;
+    }
+
+    #noBtn {
+        background: #ff4d6d;
+        color: white;
+        margin-right: 20px;
+        position: fixed; /* IMPORTANT */
+    }
+
+    /* Celebration */
+    .celebrate {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .celebrate img {
+        width: 250px;
+        margin-top: 20px;
+        border-radius: 20px;
+    }
+
+    /* Confetti */
+    .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        animation: fall 3s linear infinite;
+    }
+
+    @keyframes fall {
+        from {
+            transform: translateY(-100vh) rotate(0deg);
+        }
+        to {
+            transform: translateY(100vh) rotate(360deg);
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+    <h1>Is harish Gay ? 🫂🫦</h1>
+    <button id="yesBtn">Yes </button>
+    <button id="noBtn">No </button>
+</div>
+
+<div class="celebrate" id="celebrate">
+    <h1>🎉 Yay! You are correct🎉</h1>
+    <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExajNmOXpicnNrOTc5Y3VlajQxeTJhcTBxMHZ3M3Nsam5lbHAybWpleSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/13OYNXi0uTM6vS/giphy.gif">
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const card = document.getElementById("card");
+    const celebrate = document.getElementById("celebrate");
+
+    // Move NO button but keep it inside screen
+    function moveNoButton() {
+        const padding = 20;
+        const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+        const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+        const x = Math.random() * maxX;
+        const y = Math.random() * maxY;
+
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    }
+
+    // Trigger on hover OR click
+    noBtn.addEventListener("mouseenter", moveNoButton);
+    noBtn.addEventListener("click", moveNoButton);
+
+    // YES button action
+    yesBtn.addEventListener("click", () => {
+        card.style.display = "none";
+        celebrate.style.display = "flex";
+        launchConfetti();
+    });
+
+    function launchConfetti() {
+        for (let i = 0; i < 60; i++) {
+            const confetti = document.createElement("div");
+            confetti.className = "confetti";
+            confetti.style.left = Math.random() * window.innerWidth + "px";
+            confetti.style.background =
+                `hsl(${Math.random() * 360}, 100%, 50%)`;
+            confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
+            document.body.appendChild(confetti);
+
+            setTimeout(() => confetti.remove(), 3000);
+        }
+    }
+</script>
+
+</body>
+</html>
